@@ -1453,7 +1453,7 @@ src="https://www.facebook.com/tr?id=1709864256847674&ev=PageView&noscript=1"
 
     const options = {
       key: 'rzp_live_ReKrWIrOgXhFIS',
-      amount: 200, // TEST: ₹2 — change back to 9900 for live
+      amount: 9900,
       currency: 'INR',
       name: 'ವಾಸ್ತು ಮಾಸ್ಟರ್‌ಕ್ಲಾಸ್',
       description: 'Vastu Masterclass — Acharya Sachin Joshi',
@@ -1461,14 +1461,11 @@ src="https://www.facebook.com/tr?id=1709864256847674&ev=PageView&noscript=1"
       prefill: { name: name, contact: mobile },
       theme: { color: '#D4A017' },
       handler: function(response) {
-        // Fire Meta Purchase event
-        if (typeof fbq !== 'undefined') {
-          fbq('track', 'Purchase', { value: 99, currency: 'INR' });
-        }
-        // Send to Google Sheet
+        // Send to Google Sheet then redirect
         fetch(APPS_SCRIPT_URL, {
           method: 'POST',
           redirect: 'follow',
+          keepalive: true,
           headers: { 'Content-Type': 'text/plain' },
           body: JSON.stringify({
             name: name,
@@ -1477,12 +1474,9 @@ src="https://www.facebook.com/tr?id=1709864256847674&ev=PageView&noscript=1"
             payment_id: response.razorpay_payment_id,
             amount: 99
           })
+        }).finally(function() {
+          window.location.href = 'thank-you.html?pid=' + response.razorpay_payment_id;
         });
-        // Close reg modal, show success popup
-        closeRegModal();
-        document.getElementById('successPaymentId').textContent = 'Payment ID: ' + response.razorpay_payment_id;
-        document.getElementById('successOverlay').classList.add('active');
-        document.body.style.overflow = 'hidden';
       }
     };
 
