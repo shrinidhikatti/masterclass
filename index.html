@@ -42,11 +42,11 @@
   }
 
   @media (max-width: 480px) {
-    .hero-cta-block { padding: 2rem 1rem 5rem; }
+    .hero-cta-block { padding: 2rem 1.2rem 5rem; overflow-x: hidden; }
     .hero-title { font-size: 1.7rem; }
     .hero-subtitle { font-size: 0.95rem; }
-    .hero-warning { padding: 0.85rem 1rem; flex-direction: column; gap: 0.5rem; }
-    .hero-warning .warn-icon { font-size: 1.4rem; }
+    .hero-warning { padding: 0.85rem 1rem; flex-direction: row; gap: 0.7rem; width: 100%; margin-left: 0; margin-right: 0; max-width: 100%; }
+    .hero-warning .warn-icon { font-size: 1.2rem; flex-shrink: 0; }
     .price-new { font-size: 2.8rem; }
     .cta-btn { font-size: 1rem; padding: 1rem 2rem; width: 100%; text-align: center; display: block; }
     .price-hero { gap: 1rem; }
@@ -571,10 +571,17 @@
 
   .count-box {
     background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,107,26,0.3);
+    border: 1px solid rgba(255,107,26,0.6);
     border-radius: 0.75rem;
     padding: 1rem 1.5rem;
     min-width: 90px;
+    box-shadow: 0 0 12px rgba(255,107,26,0.4), 0 0 30px rgba(255,107,26,0.15), inset 0 0 10px rgba(255,107,26,0.05);
+    animation: boxGlow 2s ease-in-out infinite;
+  }
+
+  @keyframes boxGlow {
+    0%, 100% { box-shadow: 0 0 12px rgba(255,107,26,0.4), 0 0 30px rgba(255,107,26,0.15), inset 0 0 10px rgba(255,107,26,0.05); }
+    50% { box-shadow: 0 0 20px rgba(255,107,26,0.7), 0 0 50px rgba(255,107,26,0.3), inset 0 0 15px rgba(255,107,26,0.08); }
   }
 
   .count-num {
@@ -734,6 +741,23 @@
     .expert-info h3 { font-size: 1.5rem; }
   }
 
+  /* ---- BANNER IMAGE ---- */
+  .banner-hero-wrap {
+    width: 100%;
+    max-width: 600px;
+    margin: 1rem auto;
+    border-radius: 1.2rem;
+    overflow: hidden;
+    border: 2px solid rgba(212,160,23,0.4);
+    box-shadow: 0 0 30px rgba(212,160,23,0.2), 0 8px 32px rgba(0,0,0,0.5);
+  }
+
+  .banner-hero-img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
   /* ---- ROTATING HERO TITLE ---- */
   .hero-title { transition: opacity 0.4s ease, transform 0.4s ease; }
 
@@ -860,6 +884,10 @@
 <!-- HERO CTA BLOCK -->
 <section class="hero-cta-block">
   <div class="badge-urgent"><span class="flame">🔥</span> ಕೇವಲ 100 ಸ್ಥಾನಗಳು ಉಳಿದಿವೆ!</div>
+
+  <div class="banner-hero-wrap">
+    <img src="images/banner.png" alt="Acharya Sachin Joshi" class="banner-hero-img" />
+  </div>
 
   <h1 class="hero-title" id="heroTitle">
     ನಾಳೆ ನಿಮ್ಮ <span class="highlight">Income Source</span><br>ಬದಲಾಗಬಹುದು!
